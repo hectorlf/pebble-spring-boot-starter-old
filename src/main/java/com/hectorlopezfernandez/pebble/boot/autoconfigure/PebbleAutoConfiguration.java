@@ -91,7 +91,7 @@ public class PebbleAutoConfiguration {
 			pvr.setSuffix(properties.getSuffix());
 			
 			pvr.setContentType(properties.getContentType().toString());
-			pvr.setOrder(Ordered.LOWEST_PRECEDENCE);
+			pvr.setOrder(Ordered.LOWEST_PRECEDENCE - 5);
 
 			return pvr;
 		}
