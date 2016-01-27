@@ -7,7 +7,7 @@ repositories {
 
 project.sourceCompatibility = '1.8'
 project.archivesBaseName = 'pebble-spring-boot-starter'
-project.version = '0.5.1'
+project.version = '0.5.2'
 
 dependencies {
    compile 'org.springframework.boot:spring-boot-starter-web:1.3.2.RELEASE'
