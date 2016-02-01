@@ -42,4 +42,12 @@ public class ControllerTests {
 			.andExpect(content().string("Hello Pebbleworld!"));
 	}
 
+	@Test
+	public void testRequestAccess() throws Exception {
+		mockMvc.perform(get("/contextPath.action"))
+			.andExpect(status().isOk())
+			.andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+			.andExpect(content().string("ctx path:"));
+	}
+
 }

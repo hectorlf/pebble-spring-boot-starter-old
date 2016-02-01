@@ -12,4 +12,9 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping("/contextPath.action")
+    public String contextPath(ModelMap model) {
+        return "contextPath";
+    }
+
 }
