@@ -1,7 +1,6 @@
 package com.hectorlopezfernandez.pebble.boot.autoconfigure;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.Servlet;
 
@@ -46,7 +45,7 @@ public class PebbleAutoConfiguration {
 
 	@Configuration
 	@ConditionalOnMissingBean(PebbleEngine.class)
-	protected static class PebbleDefaultConfiguration {
+	public static class PebbleDefaultConfiguration {
 		
 		@Autowired
 		private PebbleProperties properties;
@@ -55,13 +54,15 @@ public class PebbleAutoConfiguration {
 		private Loader<?> pebbleLoader; 
 		
 		@Autowired(required = false)
-		private Collection<Extension> extensions = Collections.emptySet();
+		private List<Extension> extensions;
 		
 		@Bean
 		public PebbleEngine pebbleTemplateEngine() {
 			PebbleEngine.Builder builder = new PebbleEngine.Builder();
 			builder.loader(pebbleLoader);
-			builder.extension(extensions.toArray(new Extension[extensions.size()]));
+			if (extensions != null && !extensions.isEmpty()) {
+				builder.extension(extensions.toArray(new Extension[extensions.size()]));
+			}
 			if (!properties.isCache()) {
 				builder.templateCache(null);
 				builder.tagCache(null);
@@ -74,7 +75,7 @@ public class PebbleAutoConfiguration {
 	@Configuration
 	@ConditionalOnWebApplication
 	@ConditionalOnClass({ Servlet.class })
-	protected static class PebbleViewResolverConfiguration {
+	public static class PebbleViewResolverConfiguration {
 		
 		@Autowired
 		private PebbleProperties properties;
